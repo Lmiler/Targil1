@@ -86,7 +86,7 @@ public class Menu {
         return count;
     }
 
-    public static void isNumberPhilindrome() { //פונקציה 6
+    public static void isNumberPalindrome() { //פונקציה 6
         int number;
         do {
             System.out.println("Enter a positive five digit number: ");
@@ -94,9 +94,9 @@ public class Menu {
         } while (howMAnyDigits(number) != 5);
         String dupNumber = "" + number;
         if (dupNumber.charAt(0) == dupNumber.charAt(4) && dupNumber.charAt(1) == dupNumber.charAt(3)) {
-            System.out.println("This is a philindrome!");
+            System.out.println("This is a palindrome!");
         } else {
-            System.out.println("This is not a philindrome.");
+            System.out.println("This is not a palindrome.");
         }
     }
 
@@ -106,7 +106,7 @@ public class Menu {
         int end = scanner.nextInt();
         for (int i = start; i <= end; i++) {
             if (checkingIfPrimeNumber(i))
-                System.out.println(i);
+                System.out.print(i + ", ");
         }
     }
 
@@ -130,16 +130,14 @@ public class Menu {
         System.out.println("Enter the coefficient c: ");
         float c = scanner.nextInt();
         double inSqrt = (b * b - 4 * a * c);
-        if(inSqrt < 0){
+        if (inSqrt < 0) {
             System.out.println("There are no real solutions.");
-        }
-        else {
+        } else {
             double firstSolution = (-b - Math.sqrt(inSqrt)) / (2 * a);
             double secondSolution = (-b + Math.sqrt(inSqrt)) / (2 * a);
-            if(firstSolution == secondSolution){
+            if (firstSolution == secondSolution) {
                 System.out.println("There is only one solution: " + firstSolution);
-            }
-            else{
+            } else {
                 System.out.println("There are two solutions: " + firstSolution + ", " + secondSolution);
             }
         }
@@ -210,10 +208,10 @@ public class Menu {
         } else {
             int narcissisticNumber1 = number;
             int narcissisticNumber2 = number;
-            while(!isNarcissistic(narcissisticNumber1)) {
-                    narcissisticNumber1++;
+            while (!isNarcissistic(narcissisticNumber1)) {
+                narcissisticNumber1++;
             }
-            while(!isNarcissistic(narcissisticNumber2)) {
+            while (!isNarcissistic(narcissisticNumber2)) {
                 narcissisticNumber2--;
             }
             if (number - narcissisticNumber1 > (number - narcissisticNumber2) * -1) {
@@ -226,6 +224,39 @@ public class Menu {
 
 
     public static void main(String[] args) {
-        System.out.println();
+        System.out.println("Press: ");
+        System.out.println("1 - calculate area and scope of a circle.");
+        System.out.println("2 - convert temp from fahrenheit to celsius and vise versa.");
+        System.out.println("3 - calculating factorial of a number.");
+        System.out.println("4 - calculating of natural numbers in given range.");
+        System.out.println("5 - checking if a number is a prime number.");
+        System.out.println("6 - checking if a five digit number is a palindrome.");
+        System.out.println("7 - printing prime numbers in a given range.");
+        System.out.println("8 - calculating GCD of two numbers.");
+        System.out.println("9 - calculating solutions of quadratic equation.");
+        System.out.println("10 - calculating compound interest.");
+        System.out.println("11 - checking if a number if from the Fibonacci sequence.");
+        System.out.println("12 - locate the closest narcissistic number to a given number.");
+        System.out.println("0 - ending the program.");
+        int menu;
+        do {
+            menu = scanner.nextInt();
+            switch (menu) {
+                case 1 -> calculateCircle();
+                case 2 -> degreesConvert();
+                case 3 -> calculateFactorial();
+                case 4 -> calculateSumOfNumbers();
+                case 5 -> isPrimeNumber();
+                case 6 -> isNumberPalindrome();
+                case 7 -> printPrimeNumbers();
+                case 8 -> findGCD();
+                case 9 -> calculateQuadraticEquation();
+                case 10 -> calculateCompoundInterest();
+                case 11 -> isNumberFromFibonacci();
+                case 12 -> getNarcissisticNumber();
+                default -> System.out.println("No such action.");
+            }
+        } while (menu != 0);
+
     }
 }
