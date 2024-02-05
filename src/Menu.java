@@ -1,4 +1,5 @@
 import javax.naming.NameNotFoundException;
+import javax.swing.plaf.TableHeaderUI;
 import java.util.Scanner;
 
 public class Menu {
@@ -54,7 +55,7 @@ public class Menu {
         System.out.println("The sum of the numbers in the range you put is " + sum);
     }
 
-    public static boolean isPrimeNumber(int number) {
+    public static boolean checkingIfPrimeNumber(int number) {
         if (number == 1)
             return false;
         int divisor = 2;
@@ -70,7 +71,7 @@ public class Menu {
     public static void isPrimeNumber() {  //פונקציה 5
         System.out.println("Enter a positive number: ");
         int number = scanner.nextInt();
-        if (isPrimeNumber(number))
+        if (checkingIfPrimeNumber(number))
             System.out.println("It's a prime number!");
         else
             System.out.println("it's not a prime number.");
@@ -85,7 +86,7 @@ public class Menu {
         return count;
     }
 
-    public static void isNumberPhilindrome() { //פןנקציה 6
+    public static void isNumberPhilindrome() { //פונקציה 6
         int number;
         do {
             System.out.println("Enter a positive five digit number: ");
@@ -104,7 +105,7 @@ public class Menu {
         int start = scanner.nextInt();
         int end = scanner.nextInt();
         for (int i = start; i <= end; i++) {
-            if (isPrimeNumber(i))
+            if (checkingIfPrimeNumber(i))
                 System.out.println(i);
         }
     }
@@ -128,18 +129,23 @@ public class Menu {
         float b = scanner.nextInt();
         System.out.println("Enter the coefficient c: ");
         float c = scanner.nextInt();
-        double firstSolution = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
-        double secondSolution = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
-        if (firstSolution == secondSolution) {
-            System.out.println("There is one solution: " + firstSolution);
-        } else if (firstSolution != secondSolution) {
-            System.out.println("There are two solutions: " + firstSolution + ", " + secondSolution);
-        } else {
-            System.out.println("There are no solutions.");
+        double inSqrt = (b * b - 4 * a * c);
+        if(inSqrt < 0){
+            System.out.println("There are no real solutions.");
+        }
+        else {
+            double firstSolution = (-b - Math.sqrt(inSqrt)) / (2 * a);
+            double secondSolution = (-b + Math.sqrt(inSqrt)) / (2 * a);
+            if(firstSolution == secondSolution){
+                System.out.println("There is only one solution: " + firstSolution);
+            }
+            else{
+                System.out.println("There are two solutions: " + firstSolution + ", " + secondSolution);
+            }
         }
     }
 
-    public static void calculateCompoundInterest() { //פןנקציה 10
+    public static void calculateCompoundInterest() { //פונקציה 10
         System.out.println("Enter the found: ");
         double found = scanner.nextFloat();
         double currentFound = found;
@@ -165,12 +171,12 @@ public class Menu {
         System.out.println("The money you will withdraw is " + withdrawMoney);
     }
 
-    public static void isNumberFromFibonacci() { //פןנקציה 11
+    public static void isNumberFromFibonacci() { //פונקציה 11
         System.out.println("Enter a number: ");
         int number = scanner.nextInt();
-        double fibonacciFormola1 = Math.sqrt(5 * number * number + 4);
-        double fibonacciFormola2 = Math.sqrt(5 * number * number - 4);
-        if (fibonacciFormola1 % 1 == 0 || fibonacciFormola2 % 1 == 0) {
+        double fibonacciFormula1 = Math.sqrt(5 * number * number + 4);
+        double fibonacciFormula2 = Math.sqrt(5 * number * number - 4);
+        if (fibonacciFormula1 % 1 == 0 || fibonacciFormula2 % 1 == 0) {
             System.out.println("The number is from the Fibonacci sequence!");
         } else {
             System.out.println("The number is not from the Fibonacci sequence.");
@@ -189,6 +195,7 @@ public class Menu {
         int power = howMAnyDigits(number);
         int numberDup = number;
         int sum = 0;
+        System.out.println();
         while (numberDup > 0) {
             sum += calculatePower(numberDup % 10, power);
             numberDup /= 10;
@@ -196,27 +203,21 @@ public class Menu {
         return sum == number;
     }
 
-    public static void getNarcissisticNumber() {
+    public static void getNarcissisticNumber() {  //פונקציה 12
         System.out.println("Enter a positive neutral number: ");
         int number = scanner.nextInt();
         if (isNarcissistic(number)) {
             System.out.println("The narcissistic number closest to what you entered is " + number);
         } else {
-            int narcissisticNumber1 = 0;
-            int narcissisticNumber2 = 0;
-            for (int i = number + 1; i <= Integer.MAX_VALUE; i++) {
-                if (isNarcissistic(i)) {
-                    narcissisticNumber1 = i;
-                    break;
-                }
+            int narcissisticNumber1 = number;
+            int narcissisticNumber2 = number;
+            while(!isNarcissistic(narcissisticNumber1)) {
+                    narcissisticNumber1++;
             }
-            for (int i = number - 1; i >= Integer.MIN_VALUE; i++) {
-                if (isNarcissistic(i)) {
-                    narcissisticNumber2 = i;
-                    break;
-                }
+            while(!isNarcissistic(narcissisticNumber2)) {
+                narcissisticNumber2--;
             }
-            if (number - narcissisticNumber1 > number - narcissisticNumber2) {
+            if (number - narcissisticNumber1 > (number - narcissisticNumber2) * -1) {
                 System.out.println("The narcissistic number closest to what you entered is " + narcissisticNumber1);
             } else {
                 System.out.println("The narcissistic number closest to what you entered is " + narcissisticNumber2);
@@ -226,6 +227,6 @@ public class Menu {
 
 
     public static void main(String[] args) {
-        getNarcissisticNumber();
+
     }
 }
