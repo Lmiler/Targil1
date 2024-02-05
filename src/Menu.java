@@ -195,7 +195,6 @@ public class Menu {
         int power = howMAnyDigits(number);
         int numberDup = number;
         int sum = 0;
-        System.out.println();
         while (numberDup > 0) {
             sum += calculatePower(numberDup % 10, power);
             numberDup /= 10;
