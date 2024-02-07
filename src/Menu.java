@@ -1,5 +1,3 @@
-import javax.naming.NameNotFoundException;
-import javax.swing.plaf.TableHeaderUI;
 import java.util.Scanner;
 
 public class Menu {
@@ -49,23 +47,29 @@ public class Menu {
             end = scanner.nextInt();
         } while (start == end);
         int sum = 0;
-        for (int i = Math.min(start, end); i <= Math.max(start, end); i++) {
-            sum += i;
+        if (start < end) {
+            for (int i = start; i <= end; i++) {
+                sum += i;
+            }
+        } else {
+            for (int i = end; i <= start; i++) {
+                sum += i;
+            }
         }
         System.out.println("The sum of the numbers in the range you put is " + sum);
     }
 
     public static boolean checkingIfPrimeNumber(int number) {
-        if (number == 1)
-            return false;
+        boolean isPrime = number != 1;
         int divisor = 2;
         while (divisor * divisor <= number) {
             if (number % divisor == 0) {
-                return false;
+                isPrime = false;
+                break;
             }
             divisor = divisor + 1;
         }
-        return true;
+        return isPrime;
     }
 
     public static void isPrimeNumber() {  //פונקציה 5
@@ -86,17 +90,25 @@ public class Menu {
         return count;
     }
 
+    public static int getReverseNumber(int number) {
+        int reversedNumber = number % 10;
+        while (number > 10) {
+            reversedNumber = reversedNumber * 10 + (number / 10) % 10;
+            number /= 10;
+        }
+        return reversedNumber;
+    }
+
     public static void isNumberPalindrome() { //פונקציה 6
         int number;
         do {
             System.out.println("Enter a positive five digit number: ");
             number = scanner.nextInt();
-        } while (howMAnyDigits(number) != 5);
-        String dupNumber = "" + number;
-        if (dupNumber.charAt(0) == dupNumber.charAt(4) && dupNumber.charAt(1) == dupNumber.charAt(3)) {
-            System.out.println("This is a palindrome!");
+        } while (howMAnyDigits(number) != 5); //12321
+        if (number == getReverseNumber(number)) {
+            System.out.println("It's a palindrome!");
         } else {
-            System.out.println("This is not a palindrome.");
+            System.out.println("It's not a palindrome.");
         }
     }
 
@@ -108,6 +120,7 @@ public class Menu {
             if (checkingIfPrimeNumber(i))
                 System.out.print(i + ", ");
         }
+        System.out.println();
     }
 
     public static void findGCD() { //פונקציה 8
@@ -224,7 +237,7 @@ public class Menu {
 
 
     public static void main(String[] args) {
-        System.out.println("Press: ");
+        System.out.println("Details on actions: ");
         System.out.println("1 - calculate area and scope of a circle.");
         System.out.println("2 - convert temp from fahrenheit to celsius and vise versa.");
         System.out.println("3 - calculating factorial of a number.");
@@ -240,6 +253,7 @@ public class Menu {
         System.out.println("0 - ending the program.");
         int menu;
         do {
+            System.out.println("Choose your next action: ");
             menu = scanner.nextInt();
             switch (menu) {
                 case 1 -> calculateCircle();
@@ -254,9 +268,9 @@ public class Menu {
                 case 10 -> calculateCompoundInterest();
                 case 11 -> isNumberFromFibonacci();
                 case 12 -> getNarcissisticNumber();
+                case 0 -> System.out.println("Menu ended. Goodbye!");
                 default -> System.out.println("No such action.");
             }
         } while (menu != 0);
-
     }
 }
