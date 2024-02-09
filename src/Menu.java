@@ -113,14 +113,21 @@ public class Menu {
     }
 
     public static void printPrimeNumbers() { //פונקציה 7
-        System.out.println("enter the start and the end of the range: ");
+        System.out.println("Enter the start and the end of the range: ");
         int start = scanner.nextInt();
         int end = scanner.nextInt();
+        boolean wasPrinted = false;
         for (int i = start; i <= end; i++) {
-            if (checkingIfPrimeNumber(i))
+            if (checkingIfPrimeNumber(i)) {
+                wasPrinted = true;
                 System.out.print(i + ", ");
+            }
         }
-        System.out.println();
+        if (!wasPrinted) {
+            System.out.println("There are no prime numbers in this range.");
+        } else {
+            System.out.println();
+        }
     }
 
     public static void findGCD() { //פונקציה 8
@@ -128,7 +135,7 @@ public class Menu {
         int number = scanner.nextInt();
         int number2 = scanner.nextInt();
         int biggestDivide = 1;
-        for (int i = 2; i <= number * number2; i++) {
+        for (int i = 2; i <= number; i++) {
             if (number % i == 0 && number2 % i == 0)
                 biggestDivide = i;
         }
@@ -219,8 +226,8 @@ public class Menu {
         if (isNarcissistic(number)) {
             System.out.println("The narcissistic number closest to what you entered is " + number);
         } else {
-            int narcissisticNumber1 = number;
-            int narcissisticNumber2 = number;
+            int narcissisticNumber1 = number + 1;
+            int narcissisticNumber2 = number - 1;
             while (!isNarcissistic(narcissisticNumber1)) {
                 narcissisticNumber1++;
             }
